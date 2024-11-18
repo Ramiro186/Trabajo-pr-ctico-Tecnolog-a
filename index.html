@@ -1,0 +1,114 @@
+echo "# Hamburguesas" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Ramiro186/Hamburguesas.git
+git push -u origin main
+
+hamburguesas-flask/
+├── app.py              # Archivo principal de la app
+├── templates/          # Carpeta para plantillas HTML
+│   └── index.html      # Página principal
+├── static/             # Carpeta para archivos estáticos (CSS, imágenes)
+│   ├── css/
+│   │   └── styles.css  # Estilos CSS
+│   └── images/
+│       └── burger.jpg  # Imagen de hamburguesa
+└── requirements.txt    # Archivo con las dependencias
+
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburguesas comida rápida</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>¡Bienvenido a Mejores Hamgurguesas de comida rápida!</h1>
+    </header>
+    <main>
+        <section class="favs">
+            <h2>nustras favoritas son:</h2>
+            <div class="burger">
+                <img src="{{ url_for('static', filename='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.mcdonalds.com.ar%2Fproductos%2Fhamburguesas%2Fbig-mac&psig=AOvVaw2NKBd54KcPOmW5qL0tDJsk&ust=1731540716493000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCPDX_v_514kDFQAAAAAdAAAAABAE') }}" alt="Hamburguesa">
+                <h3>Hamburguesa Big Mac</h3>
+                <p>Una deliciosa hamburguesa con carne jugosa, queso, lechuga, tomate, cebolla, pepinillos y salsa big mac.</p>
+                <p>Precio: $12.000</p>
+            </div>
+            <div class="burger">
+                <img src="{{ url_for('static', filename='https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.burgerking.com.ar%2Fproductos&psig=AOvVaw1IgWCBPvEICYNvMqG_F0Yv&ust=1731540822269000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCODGnrT614kDFQAAAAAdAAAAABAE') }}" alt="Hamburguesa">
+                <h3>Hamburguesa Whopper</h3>
+                <p>Hamburguesa con tomate, lechuga, cebolla, carne cocida, salsa whopper y pepinillos.</p>
+                <p>Precio: $16.000</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Hamburguesas comida rápida</p>
+    </footer>
+</body>
+</html>
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.burger {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+    margin: 10px;
+}
+
+.burger img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
